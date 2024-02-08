@@ -1,0 +1,14 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+.navbar-toggler{
+    border: none;
+}
+
+#nav{
+    padding-left: 20px;
+}

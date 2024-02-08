@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from flask_login import LoginManager
 
 app = Flask(__name__)
 
@@ -27,6 +28,13 @@ def login():
         return redirect(url_for('home'))
     
     return render_template('login.html')
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view('app.login')
+@login_manager.user_loader
+def load_user(user_id):
+    return user_database.get(user_id)
 
 @app.route('logout')
 def logout():
