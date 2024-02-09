@@ -8,11 +8,14 @@ app = Flask(__name__)
 if __name__ == '__app__':
     app.run(debug=True)
 
-app.secret_key = 'hehehehehehe'
+app.secret_key = 'heheh34434grgrgrg'
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 user_database = User_Database()
 
 @app.route('/')
+# @login_required
 def home():
     if 'username' in session and session['username'] not in user_database:
         return redirect(url_for('logout'))
@@ -53,7 +56,7 @@ def sign_up():
     if request.method == 'POST':
         #Getting information from the form
         email = request.form.get('email')
-        names = request.form.get('names')
+        username = request.form.get('username')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
         
@@ -62,16 +65,20 @@ def sign_up():
             flash('Email already exists.', category='error')
         elif len(email) < 4:
             flash('Email must be greater than 4 characters.', category='error')
-        elif len(names) < 2:
-            flash("Write both first and last name.", category='error')
+        elif len(username) < 2:
+            flash("Username must be more than 2 characters.", category='error')
         elif password1 != password2:
             flash('Passwords don\'t match.', category='error')
         elif len(password1) < 7:
             flash('Password must be at least 7 characters.', category='error')
         else:
-            new_user = user_database.create_user(email, names, password1 = generate_password_hash(password1, method='pbkdf2:sha256'))
+            new_user = user_database.create_user(email, username, password1 = generate_password_hash(password1, method='pbkdf2:sha256'))
             login_user(new_user, remember=True)
             flash('Account created!', category='success')
             return redirect(url_for('app.home'))
     
     return render_template('sign_up.html', existing_user = current_user)
+
+@login_manager.user_loader
+def load_user():
+    return User.get_email()
