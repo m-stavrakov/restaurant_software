@@ -9,7 +9,8 @@ app.secret_key = 'heheh34434grgrgrg'
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    # can be login.html
+    return render_template('base.html')
 
 @app.route('/login', methods=['GET'])
 def login():
