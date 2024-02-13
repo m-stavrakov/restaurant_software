@@ -1,15 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
+import random
 
 app = Flask(__name__)
 
 if __name__ == '__app__':
-    app.run(debug=True, port=8080)
+    app.run(debug=True, port=8080, threaded=True)
 
 app.secret_key = 'heheh34434grgrgrg'
 
 @app.route('/')
 def home():
-    # can be login.html
     return render_template('base.html')
 
 @app.route('/login', methods=['GET'])
@@ -37,71 +37,28 @@ def logout():
     flash('Logged out successfully', category='success')
     return redirect(url_for('home'))
 
-# @app.route('/')
-# # @login_required
-# def home():
-#     if 'username' in session and session['username'] not in user_database:
-#         return redirect(url_for('logout'))
-#     return render_template('home.html', users = user_database.get_users())
+results = []
 
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     if request.method == 'POST':
-#         email = request.form['email']
-#         password = request.form['password']
+@app.route('/calculator', methods=['GET', 'POST'])
+def calculator():
+    if request.method == 'POST':
+        table_id = int(request.form['table-id'])
+        total = float(request.form['total'])
+        tip = float(request.form['tip'])
+        split = int(request.form['split'])
 
-#         existing_user = user_database[email] == email
+        tip_amount = total * (tip / 100)
+        total_amount = total + tip_amount
+        split_amount = total_amount / split
 
-#         if existing_user:
-#             if check_password_hash(existing_user[email].password, password):
-#                 flash('Logged in successfully!', category='success')
-#                 login_user(existing_user, remember=True)
-#                 return redirect(url_for('app.home'))
-#             else:
-#                 flash('Incorrect password, try again.', category='error')
-#         else:
-#             flash('Email does not exist.', category='error')
-        
-#     return render_template('login.html', existing_user = current_user)
+        results.append({'table_id': table_id, 'total': round(total_amount,2), 'tip': round(tip_amount,2), 'split': round(split_amount,2)})
 
-# @app.route('/logout')
-# @login_required
-# def logout():
-#     logout_user()
-#     # username = session.pop('username', None)
+    return render_template('calculator.html', results=results)
 
-#     # user_database.pop(username, None)
-
-#     return redirect(url_for('app.login'))
-
-# @app.route('/signup', methods=['GET', 'POST'])
-# def sign_up():
-#     if request.method == 'POST':
-#         #Getting information from the form
-#         email = request.form.get('email')
-#         username = request.form.get('username')
-#         password1 = request.form.get('password1')
-#         password2 = request.form.get('password2')
-        
-#         existing_user = user_database[email] == email
-#         if existing_user:
-#             flash('Email already exists.', category='error')
-#         elif len(email) < 4:
-#             flash('Email must be greater than 4 characters.', category='error')
-#         elif len(username) < 2:
-#             flash("Username must be more than 2 characters.", category='error')
-#         elif password1 != password2:
-#             flash('Passwords don\'t match.', category='error')
-#         elif len(password1) < 7:
-#             flash('Password must be at least 7 characters.', category='error')
-#         else:
-#             new_user = user_database.create_user(email, username, password1 = generate_password_hash(password1, method='pbkdf2:sha256'))
-#             login_user(new_user, remember=True)
-#             flash('Account created!', category='success')
-#             return redirect(url_for('app.home'))
-    
-#     return render_template('sign_up.html', existing_user = current_user)
-
-# @login_manager.user_loader
-# def load_user():
-#     return User.get_email()
+@app.route('/delete_result/<int:result_id>', methods=['POST'])
+def delete_result(result_id):
+    if 0 <= result_id < len(results):
+        del results[result_id]
+        return jsonify({'success': True})
+    else:
+        return jsonify({'success': False, 'error': 'Invalid index'})
