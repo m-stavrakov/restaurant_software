@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block title %}Orders{% endblock title %}
+
+{% block content %}
+    <form class="container" method="post">
+        <select name="select-table" id="select_table">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <div class="drinks-container">
+            <div class="drink-item" data-name="Water" data-price="1.99">
+                <img src="/static/images/background.jpg" alt="" width="20%">
+                <p class="drink-name">Water</p>
+                <p class="drink-price">£1.99</p>
+                <button type="submit">+</button>
+            </div>
+            <br/>
+            <div class="drink-item" data-name="Juice" data-price="2.99">
+                <img src="/static/images/background.jpg" alt="" width="20%">
+                <p class="drink-name">Juice</p>
+                <p class="drink-price">£2.99</p>
+                <button type="submit">+</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="show-order">
+        {% for order in test_orders %}
+        <p>Table: {{ order.selected_table }}</p>
+        <p>Name: {{ order.drink_item }}</p>
+        <p>Price: {{ order.price }}</p>
+        {% endfor %}
+    </div>
+{% endblock content %}

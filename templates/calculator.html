@@ -1,0 +1,93 @@
+{% extends 'base.html' %} {% block title %}Calculator{% endblock title %}
+
+{% block content %}
+
+    <!-- <div class="form-login bill"> -->
+        <form class="bill_form" method="post" action="/calculator" id='calculator-form'>
+            <div class="form-group">
+                <input 
+                type="number"
+                class="form-control"
+                id="table-id"
+                name="table-id"
+                required/>
+
+                <label for="table-id">
+                    Table Number
+                </label>
+            </div>
+
+            <div class="form-group">
+                <input 
+                type="text"
+                class="form-control"
+                id="total"
+                name="total"
+                required/>
+    
+                <label for="total">
+                    Bill
+                </label>
+            </div>
+
+            <div class="form-group">
+                <input 
+                type="text"
+                class="form-control"
+                id="tip"
+                name="tip"
+                required/>
+                <div class="input-group-append">
+                    <span class="input-group-text">%</span>
+                </div>
+                <label for="tip">
+                    Tip
+                </label>
+            </div>
+
+            <div class="form-group">
+                <input 
+                type="text"
+                class="form-control"
+                id="split"
+                name="split"
+                required/>
+
+                <label for="split">
+                    Number of people
+                </label>
+            </div>
+
+            <button type="submit" class="btn" id="calculate-btn">
+                Calculate
+            </button>
+        </form>
+
+        <div class="results" id="results">
+            <h2>Results</h2>
+            <ul class="results-list" id="results-list">
+                {% for result in results %}
+                <div class="results-container">
+                    <button class="delete-button" data-result-id="{{ loop.index0 }}">x</button>
+                    <span class="table-number"><li class="results-item">Table {{ result.table_id }}</li></span>
+                    <div class="container-row">
+                        <li class="results-item"> Total bill:</li>
+                        <span class="price-value">{{ result.total }}</span>
+                    </div>
+                    <div class="container-row">
+                        <li class="results-item">Tip:</li>
+                        <span class="price-value">{{ result.tip }}</span>
+                    </div>
+                    <div class="container-row">
+                        <li class="results-item">Price per person:</li>
+                        <span class="price-value">{{ result.split }}</span>
+                    </div>
+                    <!-- <button class="delete-button" data-result-id="{{ loop.index0 }}">Delete</button> -->
+                </div>
+                {% endfor %}
+            </ul>
+        </div>
+        
+    <!-- </div> -->
+
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block title %}Orders{% endblock title %}
+
+{% block content %}
+
+    <form action="/notes" method="post">
+        
+        <select name="table" id="table_select">
+            
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            
+        </select>
+        <input type="text" name="note_content_drinks" placeholder="Drinks"/>
+        <input type="text" name="note_content_food" placeholder="Food"/>
+        <button type="submit">Submit order</button>
+    </form>
+
+    <div class="orders" id="orders">
+        <h1>Orders</h1>
+        <ul class="orders-list" id="orders_list">
+            {% for order in notes_list %}
+            <div class="orders-container">
+                <span class="order-number"><li class="orders-item">Table {{ order.table_num }}</li></span>
+                <li class="orders-item">Drinks Order: {{ order.drinks }}</li>
+                <li class="orders-item">Food Order: {{ order.food }}</li>
+                <button class="delete_button" data-order-id="{{ loop.index0 }}">x</button>
+            </div>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock content %}

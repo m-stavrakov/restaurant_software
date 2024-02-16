@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap');
+
+*, *::before, *::after{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #57bfe2;
+    overflow-x: hidden;
+}
+
+.circle-container{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.circle {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    animation: moveUp 3s ease-in-out;
+}
+
+@keyframes moveUp {
+    0% {
+        transform: translateY(0%);
+    }
+    50% {
+        transform: translateY(-50%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* #nav{
+    padding: 20px 40px;
+} */
+
+.navbar{
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    background: #57bfe2;
+    padding: 20px;
+}
+
+h1{
+    font-size: 2rem;
+}
+
+.navbar-nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-item{
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-item:hover{
+    color: #0417a8;
+}
+
+.form-login{
+    display: grid;
+    place-content: center;
+    padding: 10%;
+    margin: auto;
+}
+
+h3{
+    color: #0417a8;
+    font-size: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.form-group{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #0417a8;
+    margin: 15px 0;
+}
+
+.form-group label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #0417a8;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.form-group input:focus~label,
+.form-group input:valid~label{
+    top: -5px;
+}
+
+.form-group input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #0417a8;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.btn{
+    width: 100%;
+    height: 45px;
+    background: #0417a8;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    font-size: 1em;
+    font-weight: 500;
+    margin-top: 20px;
+    transition: .3s;
+}
+
+.btn:hover{
+    background: #57bfe2;
+    border: 2px solid #0417a8;
+    color: #0417a8;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* ###################### CALCULATOR ###################### */
+.bill_form{
+    display: grid;
+    place-content: center;
+    padding: 20px;
+    margin: auto;
+    border: #0417a8 5px solid;
+    width: 40%;
+    backdrop-filter: blur(5px);
+    margin-top: 40px;
+}
+
+.input-group-text{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 1rem;
+    color: #0417a8;
+    font-weight: 600;
+}
+
+.results{
+    margin: 40px;
+    width: fit-content;
+}
+
+.results-container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 10px;
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    font-size: 1.2rem;
+    border: 2px solid transparent;
+    transition: .3s ease-in-out;
+}
+
+.results-container .delete-button{
+    opacity: 0;
+    transition: .3s ease-in-out;
+}
+
+.results-container:hover{
+    border: 2px solid #0417a8;
+}
+
+.results-container:hover .delete-button{
+    opacity: 1;
+}
+
+.delete-button{
+    position: absolute;
+    top: 0;
+    right: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #0417a8;
+    font-weight: 600;
+    background: none;
+    border: none;
+}
+
+.delete-button:hover{
+    font-size: 1.7rem;
+}
+
+.container-row{
+   display: flex;
+   justify-content: space-between;
+   gap: 20px;
+   border-bottom: 1.5px solid #0417a8;
+}
+
+.price-value{
+    font-weight: 700;
+}
+
+.table-number{
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+    color: #0417a8;
+}
+
+.results-list{
+    padding-left: 20px;
+    display: flex;
+    gap: 50px;
+}
+
+.results-item{
+    list-style: none;
+    font-style: italic;
+    letter-spacing: .5px;
+    font-weight: 700;
+}
+
+/* ###################### Orders ###################### */
