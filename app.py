@@ -69,8 +69,8 @@ def delete_result(result_id):
 def notes():
     if request.method == 'POST':
         table_num = request.form.get('table')
-        drinks = request.form['note_content_drinks']
-        food = request.form['note_content_food']
+        drinks = request.form.get('drinks-order')
+        food = request.form.get('food-order')
         notes_list.append({'table_num': table_num, 'drinks': drinks, 'food': food})
 
     return render_template('notes.html', notes_list=notes_list)
@@ -82,25 +82,3 @@ def delete_order(order_id):
         return jsonify({'success': True})
     else:
         return jsonify({'success': False, 'error': 'Invalid index'})
-
-@app.route('/orders', methods=['GET', 'POST'])
-def orders():
-    if request.method == 'POST':
-        selected_table = request.form.get('select-table')
-        
-        data = request.get_json()
-        # selected_table = data.get('selectedTable')
-        drink_item = data.get('name')
-        price = data.get('price')
-        # drink_item = request.args.get('name')
-        # price = request.args.get('price')
-
-        # Adding items to the list
-        test_orders.append({'selected_table': selected_table, 'drink_item': drink_item, 'price': price})
-        whole_order = defaultdict(list)
-        for order in test_orders:
-            for key, value in order.items():
-                whole_order[key].append(value)
-        print(whole_order)
-        return jsonify({'success': True})
-    return render_template('orders.html', test_orders=test_orders)

@@ -156,4 +156,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
+// Notes section options
+document.getElementById('table_options').addEventListener('change', function () {
+    let label = document.querySelector('.label-title');
+    if (this.value !== '') {
+        label.style.top = '-5px';
+    } else {
+        label.style.top = '50%';
+    }
+});
+// dots for textarea 
+let linestart = function(txt, st) {
+    let ls = txt.split("\n");
+    let i = ls.length-1;
+    ls[i] = st+ls[i];
+    return ls.join("\n");
+  };
+  $('textarea').on('keydown', function(e) {
+    let t = $(this);
+    if(e.which == 13) {
+      t.val(linestart(t.val(), '•') + "\n");
+      return false;
+    }  
+  });

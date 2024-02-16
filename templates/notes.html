@@ -2,19 +2,26 @@
 
 {% block content %}
 
-    <form action="/notes" method="post">
-        
-        <select name="table" id="table_select">
-            
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            
-        </select>
-        <input type="text" name="note_content_drinks" placeholder="Drinks"/>
-        <input type="text" name="note_content_food" placeholder="Food"/>
+    <form action="/notes" method="POST" class="order-form">
+        <div class="form-group-select">
+            <div class="table_number-container">
+                <label for="table_options" class="label-title">Table Number</label>
+                <select id="table_options" class="table_options form-control" name="table">
+                    <option></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <div class="order_input-container">
+            <textarea name="drinks-order" class="order-input" id="drinks_order" cols="10" rows="5" placeholder="Enter Drinks Order"></textarea>
+            <textarea name="food-order" class="order-input" id="food" cols="10" rows="5" placeholder="Enter Food Order"></textarea>
+            <!-- <input type="text" class="order-input" name="note_content_drinks" placeholder="Drinks"/>
+            <input type="text" class="order-input" name="note_content_food" placeholder="Food"/> -->
+        </div>
         <button type="submit">Submit order</button>
     </form>
 

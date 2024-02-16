@@ -247,3 +247,65 @@ h3{
 }
 
 /* ###################### Orders ###################### */
+
+.order-form{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-select{
+    position: relative;
+    width: 11%;
+    border-bottom: 2px solid #0417a8;
+    margin: 15px 0;
+}
+
+.table_number-container {
+    position: relative;
+}
+
+.label-title {
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #0417a8;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.table_options {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #0417a8;
+    font-weight: 600;
+    padding: 10px 35px 0 5px;
+    position: relative;
+    z-index: 1;
+}
+
+.table_options:focus + .label-title,
+.table_options:valid + .label-title {
+    top: -5px;
+}
+
+.order_input-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.order-input{
+    width: 100%;
+    white-space: pre-line;
+    padding: 5px 10px;
+    text-transform: capitalize;
+}
