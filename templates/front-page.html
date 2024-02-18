@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block title %}Calculator{% endblock title %}
+
+{% block content %}
+    <h1 class="title-main">Being a waiter has never been easier!</h1>
+        <div class="main">
+            
+            <div class="image-container">
+                <div id="img-slider">
+                    <img class="images" src="/static/images/waiter1.jpg" alt="Waiting">
+                </div>
+            </div>
+
+            <div class="description-container">
+                <p>
+                    Explore our website which will make your waiting job much easier.
+                </p>
+
+                <p>
+                    Here you can take order notes, calculate bills easily and convert between currencies with ease!
+                    A single place for multiple functions.
+                </p>
+
+                <p class="description-link">
+                    Join us today and make your job easier
+                    <a href="{{ url_for('login') }}" class="login-link">Login</a>
+                </p>
+            </div>
+
+        </div>
+{% endblock content %}

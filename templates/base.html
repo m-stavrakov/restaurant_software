@@ -6,97 +6,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
     <title>{% block title %}Home{% endblock %}</title>
 </head>
 <body>
    <div class="circle-container"></div>
-        <nav class="navbar navbar-expand-lg">
-            <!-- <button 
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#nav"
-            aria-expanded="false"
-            aria-controls="nav"
-            aria-label="Expand">
-            <span class="navbar-toggler-icon"></span>
-            </button> -->
-    
-            <div class="collapse navbar-collapse" id="nav">
-                <div class="navbar-nav me-auto mb-2 mb-lg-0">
-                    {% if 'email' in session %}
-                        <h1>
-                            {{ session['name'] }}
-                        </h1>
-                        <div class="inner-nav">
-                            <a href="/" class="nav-item nav-link" id="home">
-                                Home
-                            </a>
+   <nav class="navbar">
+    <!-- <button 
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#nav"
+    aria-expanded="false"
+    aria-controls="nav"
+    aria-label="Expand">
+    <span class="navbar-toggler-icon"></span>
+    </button> -->
+        <div class="navbar-nav">
+            {% if 'email' in session %}
+                <h1>
+                    {{ session['name'] }}
+                </h1>
+                <div class="inner-nav">
+                     <a href="/home" class="nav-item" id="home">
+                        Home
+                    </a>
         
-                            <a href="/calculator" class="nav-item nav-link" id="bill">
-                                Bill
-                            </a>
+                    <a href="/calculator" class="nav-item" id="bill">
+                        Bill
+                    </a>
         
-                            <a href="/notes" class="nav-item nav-link" id="notes">
-                                Notes
-                            </a>
+                    <a href="/notes" class="nav-item" id="notes">
+                        Notes
+                    </a>
         
-                            <a href="/converter" class="nav-item nav-link" id="converter">
-                                Converter
-                            </a>
+                    <a href="/converter" class="nav-item" id="converter">
+                        Converter
+                    </a>
         
-                            <a href="/logout" class="nav-item nav-link" id="logout">
-                                Logout
-                            </a>
-                        </div>
-    
-                    {% else %}
-    
-                        <h1>
-                            Welcome
-                        </h1>
-    
-                        <a href="{{ url_for('login') }}" class="nav-item nav-link" id="login">
-                            Login
-                        </a>
-    
-                    {% endif %}
+                    <a href="/logout" class="nav-item" id="logout">
+                        Logout
+                    </a>
                 </div>
+    
+                {% else %}
+    
+                    <h1>
+                        Welcome
+                    </h1>
+    
+                    <a href="{{ url_for('login') }}" class="nav-item" id="login">
+                        Login
+                    </a>
+    
+                {% endif %}
             </div>
         </nav>
-    
-        <!-- Displaying flash messages -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    {% if category == 'error' %}
-                        <div class="alert alert-danger alert-dismissable fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="close" data-bs-dismiss="alert">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    {% else %}
-                        <div class="alert alert-success alert-dismissable fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="close" data-bs-dismiss="alert">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            {% endif %} 
-        {% endwith %}
     
         <div class="container">
             {% block content %}
             {% endblock %}
-        </div>
-    
-        <script type="text/javascript" src="{{ url_for('static', filename='JavaScript/index.js') }}">
-        </script>
-    
+        </div> 
+        
+    <footer class="footer">
+        <div class="footer_container">
 
+            <h1 class="title-main">
+                Be the best
+            </h1>
+
+            <div class="info">
+                <ul class="info_content">
+    
+                    <li class="info_item">
+                        about us
+                    </li>
+    
+                    <li class="info_item">
+                        careers
+                    </li>
+    
+                    <li class="info_item">
+                        contact us
+                    </li>
+    
+                    <li class="info_item">
+                        feedback
+                    </li>
+
+                </ul>
+    
+                <ul class="info_content">
+                    <li class="info_title">
+                        legal
+                    </li>
+    
+                    <li class="info_item">
+                        terms
+                    </li>
+    
+                    <li class="info_item">
+                        conditions
+                    </li>
+    
+                    <li class="info_item">
+                        cookies
+                    </li>
+    
+                    <li class="info_item">
+                        copyright
+                    </li>
+                </ul>
+    
+                <ul class="info_content">
+                    <li class="info_title">
+                        follow
+                    </li>
+    
+                    <li class="info_item">
+                        facebook
+                    </li>
+    
+                    <li class="info_item">
+                        instagram
+                    </li>
+    
+                    <li class="info_item">
+                        twitter
+                    </li>
+    
+                    <li class="info_item">
+                        YouTube
+                    </li>
+                </ul>
+                </div>
+            </div>
+    
+            <div>
+
+                <p class="copy_rights">
+                    &copy; Martin Stavrakov
+                </p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='JavaScript/index.js') }}"></script>
+    
 </body>
 </html>

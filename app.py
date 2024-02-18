@@ -9,18 +9,22 @@ if __name__ == '__app__':
 app.secret_key = 'heheh34434grgrgrg'
 results = []
 notes_list = []
-test_orders = []
 
 @app.route('/')
+def base():
+    return render_template('front-page.html')
+
+@app.route('/home')
 def home():
-    return render_template('base.html')
+    return render_template('home.html')
 
 @app.route('/login', methods=['GET'])
 def login():
     # Log in page for the app
     if 'email' in session:
         flash('Successful login', category='success')
-        return render_template(url_for('home'))
+        # return render_template(url_for('home'))
+        return render_template('home.html')
     
     # flash('Please login', category='error')
     return render_template('login.html')
@@ -30,7 +34,8 @@ def login_user():
     session['email'] = request.form['email']
     session['name'] = request.form['name']
 
-    return redirect(url_for('home'))
+    return render_template('home.html')
+
 
 @app.route('/logout')
 def logout():
@@ -38,7 +43,7 @@ def logout():
     session.pop('name', None)
 
     # flash('Logged out successfully', category='success')
-    return redirect(url_for('home'))
+    return redirect(url_for('base'))
 
 @app.route('/calculator', methods=['GET', 'POST'])
 def calculator():

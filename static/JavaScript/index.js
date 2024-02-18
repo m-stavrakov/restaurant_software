@@ -67,7 +67,23 @@ document.addEventListener("DOMContentLoaded", function() {
     window.addEventListener('resize', addCircles);
 });
 
-// Deleting from Bill page
+// IMAGE SLIDER
+let img = document.getElementById('img-slider');
+let sliderImgs = ['/static/images/waiter2.jpg', '/static/images/waiter3.jpg', '/static/images/waiter4.jpg', '/static/images/paying1.jpg', '/static/images/paying2.jpg']
+let start = 0
+
+function slider(){
+    if (start < sliderImgs.length){
+        start++;
+    }else{
+        start = 1;
+    }
+    
+    img.innerHTML = "<img src=" + sliderImgs[start-1] + ">";
+};
+
+setInterval(slider, 4000);
+
 
 // Delete result asynchronously
 $(document).on('click', '.delete-button', function() {
