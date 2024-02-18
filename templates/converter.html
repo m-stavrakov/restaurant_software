@@ -1,0 +1,56 @@
+{% extends "base.html" %} {% block title %}Converter{% endblock title %}
+
+{% block content %}
+    <form action="/converter" method="POST" class="converter-form">
+        <div class="amount-container form-group">
+            <input 
+            type="text"
+            class="form-control"
+            id="amount"
+            name="amount"
+            value="{{ request.form['amount'] }}"
+            required/>
+
+            <label for="amount">
+                Amount
+            </label>
+        </div>
+
+        <div class="table_number-container">
+            <label for="from_currency" class="currency-title_from">
+                From
+            </label>
+            <select name="from_currency" id="from_currency" class="table_options form-control">
+                <option></option>
+                <option value="GBP" class="flags" {% if request.form['from_currency'] == 'GBP' %}selected{% endif %}>🇬🇧&emsp;GBP</option>
+                <option value="EUR" class="flags" {% if request.form['from_currency'] == 'EUR' %}selected{% endif %}>🇪🇺&emsp;EUR</option>
+                <option value="USD" class="flags" {% if request.form['from_currency'] == 'USD' %}selected{% endif %}>🇺🇸&emsp;USD</option>
+            </select>
+        </div>
+<br>
+<br>
+        <div class="table_number-container">
+            <label for="to_currency" class="currency-title_to">
+                To
+            </label>
+            <select name="to_currency" id="to_currency" class="table_options form-control">
+                <option></option>
+                <option value="GBP" class="flags" {% if request.form['to_currency'] == 'GBP' %}selected{% endif %}>🇬🇧&emsp;GBP</option>
+                <option value="EUR" class="flags" {% if request.form['to_currency'] == 'EUR' %}selected{% endif %}>🇪🇺&emsp;EUR</option>
+                <option value="USD" class="flags" {% if request.form['to_currency'] == 'USD' %}selected{% endif %}>🇺🇸&emsp;USD</option>
+            </select>
+        </div>
+        <button type="submit">Convert</button>
+    </form>
+    <form action="/reset_converter">
+        <button type="submit">Reset Page</button>
+    </form>
+
+    <div class="amount-converted" id="converted_amount">
+        <h1>Amount</h1>
+        {% if converted_amount != None %}
+            <p>Converted Amount: {{ converted_amount }}</p>
+        {% endif %}
+    </div>
+
+{% endblock content %}

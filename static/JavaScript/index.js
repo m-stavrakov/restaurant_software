@@ -157,14 +157,18 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Notes section options
-document.getElementById('table_options').addEventListener('change', function () {
-    let label = document.querySelector('.label-title');
-    if (this.value !== '') {
-        label.style.top = '-5px';
-    } else {
-        label.style.top = '50%';
-    }
-});
+let table_options = document.getElementById('table_options');
+
+if (table_options){
+    table_options.addEventListener('change', function () {
+        let label = document.querySelector('.label-title');
+        if (this.value !== '') {
+            label.style.top = '-5px';
+        } else {
+            label.style.top = '50%';
+        }
+    });
+}
 // dots for textarea 
 let linestart = function(txt, st) {
     let ls = txt.split("\n");
@@ -179,3 +183,43 @@ let linestart = function(txt, st) {
       return false;
     }  
   });
+
+// Currency
+let converterPresent = document.querySelector('.converter-form');
+let from_currency = document.getElementById('from_currency');
+let to_currency = document.getElementById('to_currency');
+let amountInput = document.getElementById('amount');
+if (converterPresent ){
+    function updateLabelPosition() {
+        let labelFrom = document.querySelector('.currency-title_from');
+        let labelTo = document.querySelector('.currency-title_to');
+    
+        if (from_currency.value !== '') {
+            labelFrom.classList.add('selectedOption');
+        } else {
+            labelFrom.classList.remove('selectedOption');
+        }
+    
+        if (to_currency.value !== '') {
+            labelTo.classList.add('selectedOption');
+        } else {
+            labelTo.classList.remove('selectedOption');
+        }
+    
+        if (amountInput.value !== '') {
+            amountInput.classList.add('selectedOption');
+        } else {
+            amountInput.classList.remove('selectedOption');
+        }
+    }
+    
+    if (from_currency && to_currency && amountInput) {
+        // Initial label position update
+        updateLabelPosition();
+    
+        // Event listeners for changes in the form elements
+        from_currency.addEventListener('change', updateLabelPosition);
+        to_currency.addEventListener('change', updateLabelPosition);
+        amountInput.addEventListener('input', updateLabelPosition);
+    }
+};

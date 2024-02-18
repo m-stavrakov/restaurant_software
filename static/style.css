@@ -7,6 +7,11 @@
     scroll-behavior: smooth;
 }
 
+input:-webkit-autofill{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #0417a8;
+    transition: background-color 5000s ease-in-out 0s;}
+
 body{
     font-family: 'Poppins', sans-serif;
     background-color: #57bfe2;
@@ -115,7 +120,7 @@ h3{
 }
 
 .form-group input{
-    width: 100%;
+    width: 250px;
     height: 100%;
     background: transparent;
     border: none;
@@ -308,4 +313,24 @@ h3{
     white-space: pre-line;
     padding: 5px 10px;
     text-transform: capitalize;
+}
+
+/* ###################### CONVERTER ###################### */
+
+.currency-title_from,
+.currency-title_to{
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #0417a8;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.selectedOption {
+    top: -5px;
 }

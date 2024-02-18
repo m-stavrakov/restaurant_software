@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
-from collections import defaultdict
-import traceback
+from Converter import Convert
 
 app = Flask(__name__)
 
@@ -38,7 +37,7 @@ def logout():
     session.pop('email', None)
     session.pop('name', None)
 
-    flash('Logged out successfully', category='success')
+    # flash('Logged out successfully', category='success')
     return redirect(url_for('home'))
 
 @app.route('/calculator', methods=['GET', 'POST'])
@@ -82,3 +81,36 @@ def delete_order(order_id):
         return jsonify({'success': True})
     else:
         return jsonify({'success': False, 'error': 'Invalid index'})
+
+@app.route('/converter', methods=['GET', 'POST'])
+def converter():
+    converted_amount = None
+    
+    if request.method == 'POST':
+        convert = Convert()
+        from_currency = request.form.get('from_currency')
+        to_currency = request.form.get('to_currency')
+        amount = float(request.form['amount'])
+
+        if from_currency == 'GBP' and to_currency == 'EUR':
+            converted_amount = convert.gbp_eur(amount)
+        elif from_currency == 'EUR' and to_currency == 'GBP':
+            converted_amount = convert.eur_gbp(amount)
+        elif from_currency == 'GBP' and to_currency == 'USD':
+            converted_amount = convert.gbp_usd(amount)
+        elif from_currency == 'USD' and to_currency == 'GBP':
+            converted_amount = convert.usd_gbp(amount)
+        elif from_currency == 'EUR' and to_currency == 'USD':
+            converted_amount = convert.eur_usd(amount)
+        elif from_currency == 'USD' and to_currency == 'EUR':
+            converted_amount = convert.usd_eur(amount)    
+        
+    return render_template('converter.html', converted_amount=converted_amount)
+
+@app.route('/redirect_converter')
+def redirect_converter():
+    return redirect(url_for('converter'))
+
+@app.route('/reset_converter')
+def reset_converter():
+    return render_template('converter.html', converted_amount=None)
