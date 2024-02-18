@@ -12,11 +12,18 @@ notes_list = []
 
 @app.route('/')
 def base():
-    return render_template('front-page.html')
+    if 'email' in session:
+        return redirect(url_for('home'))
+    else:
+        return render_template('front-page.html')
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    if 'email' in session:
+        return render_template('home.html')
+    else:
+        flash('Please login', category='error')
+        return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET'])
 def login():
@@ -34,8 +41,7 @@ def login_user():
     session['email'] = request.form['email']
     session['name'] = request.form['name']
 
-    return render_template('home.html')
-
+    return redirect(url_for('home'))
 
 @app.route('/logout')
 def logout():
@@ -108,7 +114,9 @@ def converter():
         elif from_currency == 'EUR' and to_currency == 'USD':
             converted_amount = convert.eur_usd(amount)
         elif from_currency == 'USD' and to_currency == 'EUR':
-            converted_amount = convert.usd_eur(amount)    
+            converted_amount = convert.usd_eur(amount)
+        elif from_currency == 'GBP' and to_currency == 'GBP' or from_currency == 'EUR' and to_currency == 'EUR' or from_currency == 'USD' and to_currency == 'USD':
+            flash('Currencies need to be different')
         
     return render_template('converter.html', converted_amount=converted_amount)
 

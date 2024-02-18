@@ -1,4 +1,5 @@
-// Circles Background
+// *************************** Circles Background ***************************
+
 document.addEventListener("DOMContentLoaded", function() {
     // Function to generate random position for a circle
     function generateRandomPosition() {
@@ -67,7 +68,8 @@ document.addEventListener("DOMContentLoaded", function() {
     window.addEventListener('resize', addCircles);
 });
 
-// IMAGE SLIDER
+// *************************** Image slider ***************************
+
 let img = document.getElementById('img-slider');
 let sliderImgs = ['/static/images/waiter2.jpg', '/static/images/waiter3.jpg', '/static/images/waiter4.jpg', '/static/images/paying1.jpg', '/static/images/paying2.jpg']
 let start = 0
@@ -78,12 +80,32 @@ function slider(){
     }else{
         start = 1;
     }
-    
+
     img.innerHTML = "<img src=" + sliderImgs[start-1] + ">";
 };
 
 setInterval(slider, 4000);
 
+// *************************** Scroll Image ***************************
+
+document.addEventListener('DOMContentLoaded', function () {
+    let hoverable = document.querySelector('.hoverable');
+    let hiddenText = document.querySelector('.hidden-text');
+
+    window.addEventListener('scroll', function () {
+        let scrollPos = window.scrollY;
+
+        if (scrollPos > 30) { 
+            hoverable.classList.add('scrolled');
+            hiddenText.classList.add('show-text');
+        } else {
+            hoverable.classList.remove('scrolled');
+            hiddenText.classList.remove('show-text');
+        }
+    });
+});
+
+// *************************** Deleting Calculations ***************************
 
 // Delete result asynchronously
 $(document).on('click', '.delete-button', function() {
@@ -103,7 +125,7 @@ $(document).on('click', '.delete-button', function() {
     });
 });
 
-// Deleting from notes
+// *************************** Deleting Notes ***************************
 
 $(document).on('click', '.delete_button', function() {
     // Retrieve the order ID from the data-order-id attribute (html)
@@ -127,52 +149,8 @@ $(document).on('click', '.delete_button', function() {
     });
 });
 
-// Orders
+// *************************** Notes Options ***************************
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Get all elements with the class 'container'
-    let containers = document.querySelectorAll('.drink-item');
-
-    // Attach click event listeners to each container
-    containers.forEach(function(container) {
-        container.addEventListener('click', function(event) {
-            event.preventDefault();
-            // Extract name and price from data attributes
-            let selectedTable = document.getElementById('select_table').value;
-            let name = container.getAttribute('data-name');
-            let price = parseFloat(container.getAttribute('data-price'));
-            console.log('table' + selectedTable);
-            console.log('name' + name);
-            console.log('price' + price);
-
-            // Send a POST AJAX request to the Flask server
-            fetch('/orders', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    select_table: selectedTable,
-                    name: name,
-                    price: price,
-                }),
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-                // Handle the response data as needed
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    });
-});
-
-// Notes section options
 let table_options = document.getElementById('table_options');
 
 if (table_options){
@@ -184,8 +162,10 @@ if (table_options){
             label.style.top = '50%';
         }
     });
-}
-// dots for textarea 
+};
+
+// *************************** Textarea Decoration ***************************
+
 let linestart = function(txt, st) {
     let ls = txt.split("\n");
     let i = ls.length-1;
@@ -200,7 +180,8 @@ let linestart = function(txt, st) {
     }  
   });
 
-// Currency
+// *************************** Currency ***************************
+
 let converterPresent = document.querySelector('.converter-form');
 let from_currency = document.getElementById('from_currency');
 let to_currency = document.getElementById('to_currency');

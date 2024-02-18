@@ -223,6 +223,7 @@ img{
     font-size: 2rem;
     text-align: center;
     text-transform: uppercase;
+    margin-bottom: 10px;
 }
 
 .form-group{
@@ -283,6 +284,139 @@ img{
     color: #0417a8;
     font-weight: bold;
     font-size: 1.2rem;
+}
+
+/* ###################### HOME ###################### */
+
+.home{
+    padding: 40px;
+}
+
+.home-outer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.hoverable {
+    overflow: hidden;
+    position: relative;
+    display: flex;
+}
+
+.home-outer_img {
+    width: 70%;
+    height: auto;
+    transition: width 0.8s ease, transform 0.8s ease;
+}
+
+.hidden-text {
+    opacity: 0;
+    margin-left: 20px;
+    transition: opacity 0.8s ease;
+}
+
+.hoverable.scrolled .home-outer_img {
+    width: 50%;
+    transform: translateX(-20%);
+}
+
+.hidden-text.show-text {
+    opacity: 1;
+}
+
+/* .hoverable:hover .home-outer_img {
+    width: 80%;
+    transform: translateX(-20%);
+}
+
+.hoverable:hover .hidden-text {
+    opacity: 1;
+}
+
+.hoverable:hover .hidden-text {
+    opacity: 1;
+} */
+
+.home-inner{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 50px;
+}
+
+.home-container {
+    position: relative;
+}
+
+.home-container img {
+    width: 400px;
+    height: auto;
+    box-shadow: 45px 30px 15px -9px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: filter 0.3s;
+}
+
+.home-description {
+    position: absolute;
+    width: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #1ab2e5;
+    -webkit-text-stroke: #0417a8 1px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.home-container:hover img {
+    filter: blur(8px);
+}
+
+.home-container:hover .home-description {
+    opacity: 1;
+}
+
+.text{
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 50px;
+}
+
+.text-link{
+    text-decoration: none;
+    color: #1ab2e5;
+    -webkit-text-stroke: #0417a8 1px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    position: relative;
+    transition: color .2s ease-in-out;
+}
+
+.text-link:after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 3px;
+    bottom: -3px;
+    left: 0;
+    background-color: #0417a8;
+    transform-origin: center;
+    transition: transform 0.25s ease-out;
+}
+
+.text-link:hover{
+    color: #0417a8;
+    -webkit-text-stroke: #1ab2e5 1px;
+    /* color: #0417a8; */
+}
+
+.text-link:hover:after{
+    transform: scaleX(1);
+    transform-origin: center;
 }
 
 /* ###################### CALCULATOR ###################### */

@@ -1,4 +1,47 @@
 {% extends 'base.html' %} {% block title %}Changed{% endblock %}
 
 {% block content %}
+
+    <div class="home">
+        <h1>Dear Mr {{ session['name'] }},</h1>
+        <div class="home-outer">
+            <div class="hoverable">
+            <img class="home-outer_img" src="/static/images/2waiters.jpg" alt="boy and girl waiters">
+            <p class="hidden-text">Welcome to Easy Waiting. Here you will experience</p>
+            </div>
+        </div>
+        <div class="home-inner">
+            <div class="home-container">
+                <img src="/static/images/weiter-vectot.jpg" alt="waiter vector">
+                <div class="home-description">
+                    <p class="text">
+                        Taking orders never been easier. Simply input the drinks and food 
+                        orders and they will be saved in the system.
+                    </p>
+                    <a class="text-link" href="/notes">Check it out -></a>
+                </div>
+            </div>
+    
+            <div class="home-container">
+                <img src="/static/images/bill.jpg" alt="bill image">
+                <div class="home-description">
+                    <p class="text">
+                        Calculate the total with ease including the tip. 
+                        You can even calculate the exact bill per person.
+                    </p>
+                    <a class="text-link" href="/calculator">Check it out -></a>
+                </div>
+            </div>
+    
+            <div class="home-container">
+                <img src="/static/images/currency.jpg" alt="currency image">
+                <div class="home-description">
+                    <p class="text">
+                        Convert currencies easily with no need of the internet.
+                    </p>
+                    <a class="text-link" href="/converter">Check it out -></a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
