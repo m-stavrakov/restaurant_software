@@ -7,7 +7,7 @@ The final page is the converter. The user can enter any amount and choose betwee
 ##How to deploy/access
 1. Upolkoad the project folder to your own github.
 2. Clone this git repository https://github.com/m-stavrakov/restaurant_software
-3. Access by this IP address: (https://render.com/docs/web-services#port-detection)
+3. Access by this IP address: https://restaurant-software.onrender.com
 
 Create an account in render.com
 Link your gitub accopunt to your render account
