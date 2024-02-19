@@ -2,14 +2,23 @@
 
 {% block content %}
 
-    <div class="home">
-        <h1>Dear Mr {{ session['name'] }},</h1>
+    <div class="home" id="home-page">
+        <h1 class="home-title">Dear Mr {{ session['name'] }},</h1>
         <div class="home-outer">
             <div class="hoverable">
-            <img class="home-outer_img" src="/static/images/2waiters.jpg" alt="boy and girl waiters">
-            <p class="hidden-text">Welcome to Easy Waiting. Here you will experience</p>
+                <img class="home-outer_img" src="/static/images/2waiters.jpg" alt="boy and girl waiters">
+                <p class="hidden-text" id="hidden-text_one">
+                    Welcome to Easy Waiting. Here you will experience waiting like never before.
+                    A waiter needs to do numerous tasks such as taking orders, calculating the total bill,
+                    including tip and division between people on the table. Now this and more is all possible with Easy Waiting.
+                </p>
             </div>
         </div>
+
+        <div class="message-text">
+            <p>Check out what we offer:</p>
+        </div>
+
         <div class="home-inner">
             <div class="home-container">
                 <img src="/static/images/weiter-vectot.jpg" alt="waiter vector">

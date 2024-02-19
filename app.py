@@ -22,18 +22,14 @@ def home():
     if 'email' in session:
         return render_template('home.html')
     else:
-        flash('Please login', category='error')
         return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET'])
 def login():
     # Log in page for the app
     if 'email' in session:
-        flash('Successful login', category='success')
-        # return render_template(url_for('home'))
         return render_template('home.html')
     
-    # flash('Please login', category='error')
     return render_template('login.html')
 
 @app.route('/login', methods=['POST'])
@@ -48,7 +44,7 @@ def logout():
     session.pop('email', None)
     session.pop('name', None)
 
-    # flash('Logged out successfully', category='success')
+    flash('Logged out successfully', category='success')
     return redirect(url_for('base'))
 
 @app.route('/calculator', methods=['GET', 'POST'])
@@ -116,7 +112,7 @@ def converter():
         elif from_currency == 'USD' and to_currency == 'EUR':
             converted_amount = convert.usd_eur(amount)
         elif from_currency == 'GBP' and to_currency == 'GBP' or from_currency == 'EUR' and to_currency == 'EUR' or from_currency == 'USD' and to_currency == 'USD':
-            flash('Currencies need to be different')
+            flash('Currencies need to be different. Please use different currencies!', category='error')
         
     return render_template('converter.html', converted_amount=converted_amount)
 

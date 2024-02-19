@@ -1,11 +1,22 @@
 {% extends "base.html" %} {% block title %}Orders{% endblock title %}
 
 {% block content %}
+    <div class="order-description">
+        <h2 class="notes-title">
+            Welcome to orders
+        </h2>
+        <p class="notes-description">
+            Simply choose the table number,<br> input the drinks and food orders separately <br>
+            and you will have them saved for later use.
+        </p>
+    </div>
 
     <form action="/notes" method="POST" class="order-form">
         <div class="form-group-select">
             <div class="table_number-container">
-                <label for="table_options" class="label-title">Table Number</label>
+                <label for="table_options" class="label-title">
+                    Table Number
+                </label>
                 <select id="table_options" class="table_options form-control" name="table">
                     <option></option>
                     <option value="1">1</option>
@@ -19,21 +30,29 @@
         <div class="order_input-container">
             <textarea name="drinks-order" class="order-input" id="drinks_order" cols="10" rows="5" placeholder="Enter Drinks Order"></textarea>
             <textarea name="food-order" class="order-input" id="food" cols="10" rows="5" placeholder="Enter Food Order"></textarea>
-            <!-- <input type="text" class="order-input" name="note_content_drinks" placeholder="Drinks"/>
-            <input type="text" class="order-input" name="note_content_food" placeholder="Food"/> -->
         </div>
-        <button type="submit">Submit order</button>
+        <button type="submit" class="btn-orders">Submit order</button>
     </form>
 
     <div class="orders" id="orders">
-        <h1>Orders</h1>
+        <h2 class="lists-title">
+            Orders
+        </h2>
         <ul class="orders-list" id="orders_list">
             {% for order in notes_list %}
             <div class="orders-container">
-                <span class="order-number"><li class="orders-item">Table {{ order.table_num }}</li></span>
-                <li class="orders-item">Drinks Order: {{ order.drinks }}</li>
-                <li class="orders-item">Food Order: {{ order.food }}</li>
                 <button class="delete_button" data-order-id="{{ loop.index0 }}">x</button>
+                <span class="order-number">
+                    <li class="orders-item">Table {{ order.table_num }}</li>
+                </span>
+                <div>
+                    <li class="orders-item">Drinks Order :</li>
+                    <span class="item">{{ order.drinks }}</span>
+                </div>
+                <div>
+                    <li class="orders-item">Food Order :</li>
+                    <span class="item">{{ order.food }}</span>
+                </div>
             </div>
             {% endfor %}
         </ul>

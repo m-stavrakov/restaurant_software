@@ -6,10 +6,12 @@ document.addEventListener("DOMContentLoaded", function() {
         const gridSize = 100; // Define grid size to avoid overlap
         const maxAttempts = 10; // Maximum number of attempts to find a non-overlapping position
 
+        let randomX, randomY;
+
         // Attempt to find a non-overlapping position
         for (let attempt = 0; attempt < maxAttempts; attempt++) {
-            const randomX = Math.random() * window.innerWidth;
-            const randomY = Math.random() * window.innerHeight;
+            randomX = Math.random() * window.innerWidth;
+            randomY = Math.random() * window.innerHeight;
 
             // Check if the position overlaps with existing circles
             let overlapping = false;
@@ -73,37 +75,71 @@ document.addEventListener("DOMContentLoaded", function() {
 let img = document.getElementById('img-slider');
 let sliderImgs = ['/static/images/waiter2.jpg', '/static/images/waiter3.jpg', '/static/images/waiter4.jpg', '/static/images/paying1.jpg', '/static/images/paying2.jpg']
 let start = 0
+if (img){
+    function slider(){
+        if (start < sliderImgs.length){
+            start++;
+        }else{
+            start = 1;
+        }
 
-function slider(){
-    if (start < sliderImgs.length){
-        start++;
-    }else{
-        start = 1;
-    }
+        img.innerHTML = "<img src=" + sliderImgs[start-1] + ">";
+    };
 
-    img.innerHTML = "<img src=" + sliderImgs[start-1] + ">";
-};
-
-setInterval(slider, 4000);
-
+    setInterval(slider, 4000);
+}
 // *************************** Scroll Image ***************************
 
-document.addEventListener('DOMContentLoaded', function () {
-    let hoverable = document.querySelector('.hoverable');
-    let hiddenText = document.querySelector('.hidden-text');
+let home = document.getElementById('home-page')
+if (home){
+    document.addEventListener('DOMContentLoaded', function () {
+        let hoverableOne = document.querySelector('.hoverable');
+        let hiddenTextOne = document.getElementById('hidden-text_one');
 
-    window.addEventListener('scroll', function () {
-        let scrollPos = window.scrollY;
+        window.addEventListener('scroll', function () {
+            let scrollPos = window.scrollY;
 
-        if (scrollPos > 30) { 
-            hoverable.classList.add('scrolled');
-            hiddenText.classList.add('show-text');
-        } else {
-            hoverable.classList.remove('scrolled');
-            hiddenText.classList.remove('show-text');
-        }
+            if (scrollPos > 30) { 
+                hoverableOne.classList.add('scrolled');
+                hiddenTextOne.classList.add('show-text');
+            } else {
+                hoverableOne.classList.remove('scrolled');
+                hiddenTextOne.classList.remove('show-text');
+            }
+        });
     });
-});
+};
+
+// *************************** Calculations Description ***************************
+
+let calculatorPresent = document.querySelector('.calculator-container');
+
+if (calculatorPresent){
+    document.addEventListener('DOMContentLoaded', function () {
+        const formGroups = document.querySelectorAll('.form-group');
+        const hiddenListItems = document.querySelectorAll('#hidden-list li');
+    
+        formGroups.forEach(function (formGroup) {
+            formGroup.addEventListener('mouseover', function () {
+                // Hide all list items
+                hiddenListItems.forEach(function (item) {
+                    item.style.display = 'none';
+                });
+    
+                // Show the corresponding list item
+                const index = formGroup.getAttribute('data-index');
+                hiddenListItems[index].style.display = 'block';
+            });
+        });
+    
+        // Hide the list when mouse leaves the form container
+        document.querySelector('.bill_form').addEventListener('mouseleave', function () {
+            hiddenListItems.forEach(function (item) {
+                item.style.display = 'none';
+            });
+        });
+    });
+};
 
 // *************************** Deleting Calculations ***************************
 
@@ -213,10 +249,25 @@ if (converterPresent ){
     if (from_currency && to_currency && amountInput) {
         // Initial label position update
         updateLabelPosition();
-    
+        
         // Event listeners for changes in the form elements
+        from_currency.addEventListener('input', updateLabelPosition);
+        to_currency.addEventListener('input', updateLabelPosition);
+
+        // Handle 'change' event for compatibility
         from_currency.addEventListener('change', updateLabelPosition);
         to_currency.addEventListener('change', updateLabelPosition);
+
         amountInput.addEventListener('input', updateLabelPosition);
     }
 };
+
+// *************************** Currency ***************************
+
+const closeBtn = document.querySelectorAll('.close');
+
+closeBtn.forEach(function(closeBtn) {
+    closeBtn.addEventListener('click', function() {
+        this.parentElement.style.display = 'none';
+    });
+});

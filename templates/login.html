@@ -1,35 +1,35 @@
 {% extends "base.html" %} {% block title %}Login{% endblock title %}
 
 {% block content %}
-<form class="form-login" method="POST">
-    <h3 class="login-title">Login</h3>
-    <div class="form-group">
-        <input 
-        type="email" 
-        class="form-control" 
-        id="email" 
-        name="email" 
-        required/>
+    <form class="form-login" method="POST">
+        <h3 class="login-title">Login</h3>
+        <div class="form-group">
+            <input 
+            type="email" 
+            class="form-control" 
+            id="email" 
+            name="email" 
+            required/>
 
-        <label for="email">
-            Email
-        </label>
-    </div>
+            <label for="email">
+                Email
+            </label>
+        </div>
 
-    <div class="form-group">
-        <input 
-        type="text" 
-        class="form-control" 
-        id="name" 
-        name="name" 
-        required/>
-        <label for="name">
-            Names
-        </label>
-    </div>
+        <div class="form-group">
+            <input 
+            type="text" 
+            class="form-control" 
+            id="name" 
+            name="name" 
+            required/>
+            <label for="name">
+                Names
+            </label>
+        </div>
 
-    <button type="submit" class="btn">
-        Login
-    </button>
-</form>
+        <button type="submit" class="btn">
+            Login
+        </button>
+    </form>
 {% endblock %}
